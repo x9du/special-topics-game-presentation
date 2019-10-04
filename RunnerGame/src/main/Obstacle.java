@@ -19,7 +19,7 @@ public class Obstacle {
         this.y = y;
         
         int i = (int)(Math.random() * 4);
-        cactus = new ImageIcon("C:\\Users\\s-zouci\\OneDrive - Bellevue School District\\2019-20\\7 - Special Topics in Computer Science\\Cactus Sprites\\Cactus-" + i + ".png").getImage();
+        cactus = new ImageIcon("C:\\Users\\s-zouci\\git\\runner-game\\RunnerGame\\src\\cactusSprites\\Cactus-" + i + ".png").getImage();
     }
 	
 	public Image getImage() {

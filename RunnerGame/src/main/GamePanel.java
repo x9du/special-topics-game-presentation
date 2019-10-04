@@ -73,7 +73,7 @@ public class GamePanel extends JPanel {
 		
 		runnerGif = new ArrayList<Image>();
 		for (int i = 0; i < 2; i ++) {
-			runnerGif.add(new ImageIcon("C:\\Users\\s-zouci\\OneDrive - Bellevue School District\\2019-20\\7 - Special Topics in Computer Science\\Dino Sprites\\Dino-" + i + ".png").getImage());
+			runnerGif.add(new ImageIcon("C:\\Users\\s-zouci\\git\\runner-game\\RunnerGame\\src\\dinoSprites\\Dino-" + i + ".png").getImage());
 			// uses ImageIcon because its constructor takes files from path, Image doesn't
 		}
 		
