@@ -8,7 +8,7 @@ public class MainGameFrame extends JFrame { // JFrame = window
 	private JPanel runnerGamePanel;
 	
 	public MainGameFrame() {
-		runnerGamePanel = new RunnerGamePanel();
+		runnerGamePanel = new GamePanel();
 		
 		setDefaultCloseOperation(EXIT_ON_CLOSE); // default is to hide JFrame
 		setTitle("Runner Game v_1.4");

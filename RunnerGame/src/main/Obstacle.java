@@ -6,13 +6,15 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 
 public class Obstacle {
-	private int x, y;
+	private int x;
+	private int y;
 	private int width, height;
 	private Image cactus;
+	private boolean selected;
 	
 	public Obstacle (int x, int y) {
-        width = 90;
-        height = 90;
+        width = 60;
+        height = 60;
         this.x = x;
         this.y = y;
         
@@ -24,16 +26,20 @@ public class Obstacle {
 		return cactus;
 	}
 	
-	public double getArea() {
-		return width * height;
-	}
-	
 	public int getX() {
 		return x;
 	}
 	
 	public int getY() {
 		return y;
+	}
+	
+	public boolean getSelected() {
+		return selected;
+	}
+	
+	public void setSelected(boolean selected) {
+		this.selected = selected;
 	}
 	
 	public void setLocation(int x, int y) {
