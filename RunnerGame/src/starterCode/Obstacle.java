@@ -1,4 +1,4 @@
-package main;
+package starterCode;
 
 import java.awt.Image;
 import java.util.ArrayList;
@@ -12,14 +12,8 @@ public class Obstacle {
 	private Image cactus;
 	
 	public Obstacle(int x, int y) {
-        width = 60;
-        height = 60;
-        this.x = x;
-        this.y = y;
-        
-        int i = (int)(Math.random() * 4);
-        cactus = new ImageIcon("C:\\Users\\s-zouci\\git\\runner-game\\RunnerGame\\src\\cactusSprites\\Cactus-" + i + ".png").getImage();
-    }
+		//**Initialize fields
+	}
 	
 	public Image getImage() {
 		return cactus;
