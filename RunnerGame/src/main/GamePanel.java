@@ -189,6 +189,9 @@ public class GamePanel extends JPanel {
 		}
 	}
 	
+	// KeyAdapter vs. KeyListener:
+	// KeyListener is interface, must implement all methods, even ones you don't need
+	// KeyAdapter is abstract class, you can just implement the methods you need
 	class JumpKeyListener extends KeyAdapter {
 		// getExtendedKeyCode() returns unique id for key
 		// VK_UP is static int that means up key pressed
