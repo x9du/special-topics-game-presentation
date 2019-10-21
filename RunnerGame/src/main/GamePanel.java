@@ -88,12 +88,11 @@ public class GamePanel extends JPanel {
 		setBackground(Color.WHITE);
 		
 		Graphics2D g2 = (Graphics2D) g; // Graphics2D has extra functionality for 2D
-		g2.fillRect(0, BASEY, getWidth(), 3); // fills border. fillRect(int x, int y, int width, int height)
+		g2.fillRect(0, BASEY, PANEL_WIDTH, 3); // fills border. fillRect(int x, int y, int width, int height)
 		
-		// drawImage(Image img, dx1, dy1, dx2, dy2, sx1, sy1, sx2, sy2, observer)
-		// = drawImage(Image, destination top left corner, destination bottom right corner relative to TL, source TL, source relative BR, observer)
-		// source arguments "select" an area of the image to be displayed
-		// source arguments are the whole image by default?
+		// drawImage(Image img, int x, int y, int width, int height, ImageObserver observer)
+		// draws image inside the specified rectangle, scaled if necessary
+		// ImageObserver: object to which method returns true/false
 		g2.drawImage(runnerGif.get(runnerGifIndex), 30, BASEY - 90 - heightOfJump, 90, 90, this); // gif at 30, 160 with size 90, 90
 		
 		for(int i = 0; i < obstacles.size(); i++) {
@@ -119,7 +118,7 @@ public class GamePanel extends JPanel {
 			}
 		    
 			Obstacle obstacle = obstacles.get(obstacles.size() - 1); // get last obstacle
-			if(800 - obstacle.getX() == randomGap) { // when the last obstacle is randomGap far from the right
+			if(PANEL_WIDTH - obstacle.getX() == randomGap) { // when the last obstacle is randomGap far from the right
 				obstacles.add(new Obstacle(740, BASEY - 60));
 				randomGap = (int)(Math.random() * (MAXGAP - MINGAP)) + MINGAP;
 				
@@ -176,7 +175,7 @@ public class GamePanel extends JPanel {
 				isMaxHeight = true;
 			}
 			if(isMaxHeight) {
-				heightOfJump--; // if isMaxHeight, decrement jumpCount every 2 ms until 0
+				heightOfJump--; // if isMaxHeight, decrement heightOfJump every 2 ms until 0
 				if(heightOfJump == 0) {
 					jumpTimer.stop(); // once player reaches the ground, stop jumpTimer
 					isMaxHeight = false;
