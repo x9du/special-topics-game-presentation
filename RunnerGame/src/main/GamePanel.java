@@ -55,6 +55,7 @@ public class GamePanel extends JPanel {
 	
 	// reinitializes fields every time you play again
 	private void initialize() {
+		//**Reset score
 		score = 0;
 		scoreLabel.setText("Score: " + score);
 		
@@ -64,18 +65,22 @@ public class GamePanel extends JPanel {
 		isMaxHeight = false;
 		isGameOver = false;
 		
+		//**Initialize playerBounds
 		playerBounds = new PlayerBounds(40, 40); // PlayerBounds(width, height)
 		playerBounds.setLocation(40, BASEY - 60 - heightOfJump); // (40, 190)
 		
+		//**Create ArrayList of obstacles
 		obstacles = new ArrayList<Obstacle>();
 		obstacles.add(new Obstacle(PANEL_WIDTH - 60, BASEY - 60)); // 60 x 60 Obstacle at 740, 190
 		
+		//**Create ArrayList of dinosaur sprites for runnerGif
 		runnerGif = new ArrayList<Image>();
 		for(int i = 0; i < 2; i ++) {
 			runnerGif.add(new ImageIcon("C:\\Users\\s-zouci\\git\\runner-game\\RunnerGame\\src\\dinoSprites\\Dino-" + i + ".png").getImage());
 			// uses ImageIcon because its constructor takes files from path, Image doesn't
 		}
 		
+		//**Initialize obstacleTimer, runnerTimer, and jumpTimer
 		obstacleTimer = new Timer(obstacleSpeed, new TimerActionListener()); // delay = obstacleSpeed = 2. Move obstacle 1 pixel left every 2 ms
 		runnerTimer = new Timer(100, new RunnerActionListener()); // next frame of animation every 100 ms
 		jumpTimer = new Timer(2, new JumpActionListener()); // moves runner 1 pixel up/down every 2 ms
@@ -85,21 +90,27 @@ public class GamePanel extends JPanel {
 	
 	public void paintComponent(Graphics g) { // paintComponent is called whenever something is drawn or call repaint()
 		super.paintComponent(g); // call JPanel's paintComponent method because you extend it
+		
+		//**Set background color
 		setBackground(Color.WHITE);
 		
+		//**Draw border
 		Graphics2D g2 = (Graphics2D) g; // Graphics2D has extra functionality for 2D
 		g2.fillRect(0, BASEY, PANEL_WIDTH, 3); // fills border. fillRect(int x, int y, int width, int height)
 		
+		//**Show runnerGif
 		// drawImage(Image img, int x, int y, int width, int height, ImageObserver observer)
 		// draws image inside the specified rectangle, scaled if necessary
 		// ImageObserver: object to which method returns true/false
 		g2.drawImage(runnerGif.get(runnerGifIndex), 30, BASEY - 90 - heightOfJump, 90, 90, this); // gif at 30, 160 with size 90, 90
 		
+		//**Show obstacles
 		for(int i = 0; i < obstacles.size(); i++) {
 			Obstacle obstacle = obstacles.get(i);
 			g2.drawImage(obstacle.getImage(), obstacle.getX(), BASEY - 60, 60, 60, this); // cactus at x, 190 with size 60, 60
 		}
 		
+		//**Move playerBounds to current position
 		playerBounds.setLocation(40, BASEY - 60 - heightOfJump); // moves playerBounds to current height
 	}
 	
@@ -107,6 +118,8 @@ public class GamePanel extends JPanel {
 	// & increments score, checks if player collided with obstacle -> game over, stop all timers, & ask to play again
 	class TimerActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
+			//**Obstacle movement
+			//**Remove obstacles that are off-screen
 			for(int i = 0; i < obstacles.size(); i++) {
 				Obstacle obstacle = obstacles.get(i);
 				obstacle.setLocation(obstacle.getX() - 1, obstacle.getY()); // move obstacle 1 pixel left
@@ -117,6 +130,7 @@ public class GamePanel extends JPanel {
 				}
 			}
 		    
+			//**Generate a random new obstacle
 			Obstacle obstacle = obstacles.get(obstacles.size() - 1); // get last obstacle
 			if(PANEL_WIDTH - obstacle.getX() == randomGap) { // when the last obstacle is randomGap far from the right
 				obstacles.add(new Obstacle(740, BASEY - 60));
@@ -126,6 +140,7 @@ public class GamePanel extends JPanel {
 				scoreLabel.setText("Score: " + score);
 			}
 			
+			//**If player collides with obstacle, game over and ask to play again
 			for(int i = 0; !isGameOver && i < 60; i++) {
 				// if runner and obstacle collides (if playerBounds contains any of the 60 points within obstacle), game over
 				if(playerBounds.contains(obstacles.get(0).getX() + i, obstacles.get(0).getY())) {
